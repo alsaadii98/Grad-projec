@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Delete{% endblock %}
+{% block content %}
+    <div class="p-5">
+        <h1>Delete "{{ object.site_name }}"</h1>
+        <div class="my-4 border-top "></div>
+        <div class="alert alert-danger d-flex align-items-center" role="alert">
+            <span class="mx-1 material-symbols-outlined">warning</span>
+            <div>
+                By deleting "{{ object.site_name }}" data you can't undo this action.
+            </div>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <p class="fs-4 text">Are you sure to delete "{{ object.site_name }}"?</p>
+            <div class="d-flex justify-content-end">
+                <a href="{% url 'home' %}" class="mt-3 mx-1 px-4 py-2 btn btn-primary">Back to Home</a>
+                <button class="btn btn-danger mt-3 mx-1 px-4 py-2" type="submit">Delete</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

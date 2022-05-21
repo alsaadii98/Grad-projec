@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <div>
+        {% if user.is_authenticated %}
+
+            <div class="d-flex justify-content-between">
+                <h2>Hi {{ user.username }} !</h2>
+                <p>
+                    <a class="px-3 rounded py-2 btn btn-primary" href="{% url 'add' %}">Add Password</a>
+                </p>
+            </div>
+
+            <div class="my-5 container">
+
+                <!-- Card deck -->
+                <div class="card-deck row">
+                    {% for data in user_data %}
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <!-- Card -->
+                            <div class="card mb-4">
+                                <!--Card content-->
+                                <div class="card-body">
+                                    <!--Title-->
+                                    <h4 class="card-title">{{ data.site_name }}</h4>
+                                    <!--Text-->
+                                    <div class="card-text">
+                                        <a class="" href="#" target="_blank"
+                                           rel="noopener noreferrer">{{ data.site_url }}</a>
+                                        <div class="my-2 input-group flex-nowrap">
+                                            <span class="input-group-text" id="addon-wrapping">
+                                               <span class="material-symbols-outlined">person</span>
+                                            </span>
+                                            <input type="text" class="form-control" placeholder="Username"
+                                                   aria-label="Username" aria-describedby="addon-wrapping" value="{{ data.site_username }}">
+                                        </div>
+                                        <div class="my-2 input-group flex-nowrap">
+                                            <span class="input-group-text" id="addon-wrapping">
+                                                <span class="material-symbols-outlined">lock</span>
+                                            </span>
+                                            <input type="password" class="form-control" placeholder="Password"
+                                                   aria-label="Password" aria-describedby="addon-wrapping" value="{{ data.site_password }}">
+                                        </div>
+                                    </div>
+                                    <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                                    <div class="d-flex justify-content-end">
+                                        <a class="mx-1 my-2 btn btn-danger" href="{% url 'data_delete' data.pk %}">Delete</a>
+                                        <a class="mx-1 my-2 btn btn-primary"
+                                           href="{% url 'data_edit' data.pk %}">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card -->
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- Card deck -->
+            </div>
+
+        {% else %}
+            <p>You are not logged in</p>
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signup' %}">Signup</a>
+        {% endif %}
+    </div>
+{% endblock %}
