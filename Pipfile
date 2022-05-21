@@ -8,6 +8,9 @@ django = "*"
 django-cryptography = "*"
 django-crispy-forms = "*"
 uuid = "*"
+psycopg2-binary = "*"
+whitenoise = "*"
+gunicorn = "*"
 
 [dev-packages]
 
